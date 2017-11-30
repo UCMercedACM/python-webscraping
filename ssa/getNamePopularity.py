@@ -1,17 +1,17 @@
 import matplotlib.pyplot as plt
 import zipfile
-import urllib
+from urllib.request import urlretrieve
 import sys
 import os
 
 # Make sure user provided enough args
 if len(sys.argv) < 3:
-	print "Usage: python {} Name Gender State"
+	print("Usage: python {} Name Gender State");
 	exit();
 
 # Parse inputs - first is name, second is gender
 if sys.argv[2].lower() != "m" and sys.argv[2].lower() != "f":
-	print "Social security gender listed only as M or F";
+	print("Social security gender listed only as M or F");
 	exit();
 
 name = sys.argv[1];
@@ -30,18 +30,18 @@ if not os.path.exists(dataDirectory):
 # Check if we already have the file
 if not os.path.isfile(ssaDataZipLocation):
 	# If not, download it
-	print "Downloading..."
-	urllib.urlretrieve ("https://www.ssa.gov/oact/babynames/state/namesbystate.zip", ssaDataZipLocation);
+	print("Downloading...");
+	urlretrieve ("https://www.ssa.gov/oact/babynames/state/namesbystate.zip", ssaDataZipLocation);
 
 	# File is in zip format, so unzip it to use contents
-	print "Unzipping..."
+	print("Unzipping...");
 	zip = zipfile.ZipFile(ssaDataZipLocation)
 	zip.extractall(dataDirectory)
 
-	print "Done!"
+	print("Done!");
 
 else:
-	print "We already have our data!"
+	print("We already have our data!");
 
 # At this point, we have a directory of files, one for each year. let's list them
 dirContents = os.listdir(dataDirectory)
@@ -51,16 +51,16 @@ dirContents = os.listdir(dataDirectory)
 try:
 	desiredFile = next((f for f in dirContents if stateLabel.lower() in f.lower()));
 except StopIteration:
-	print "Couldn't find state", stateLabel;
+	print("Couldn't find state", stateLabel);
 	exit();
 
 fileToOpen = os.path.join(dataDirectory, desiredFile);
-print "Opening", fileToOpen
+print("Opening", fileToOpen);
 
 # Read data from file
 with open(fileToOpen, "r") as myFile:
 	dataLines = myFile.readlines();
-	print len(dataLines)
+	print(len(dataLines))
 
 # Step through data, store year and number of people
 years = [];
@@ -81,4 +81,4 @@ if len(counts) > 0:
 	plt.show()
 
 else:
-	print "Sorry, nobody by that name on record :("
+	print("Sorry, nobody by that name on record :(");
