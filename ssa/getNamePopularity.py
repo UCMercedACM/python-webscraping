@@ -1,6 +1,6 @@
+from urllib.request import urlretrieve
 import matplotlib.pyplot as plt
 import zipfile
-from urllib.request import urlretrieve
 import sys
 import os
 
@@ -20,8 +20,8 @@ stateLabel = sys.argv[3];
 
 # Choose what file to get, and where to put it
 zipFileName = "ssaData.zip"
-dataDirectory = os.path.join(os.getcwd(),"data");
-ssaDataZipLocation = os.path.join(dataDirectory, zipFileName);
+dataDirectory = "./data/";
+ssaDataZipLocation = dataDirectory+zipFileName;
 
 # Create data directory if it doesn't exist
 if not os.path.exists(dataDirectory):
