@@ -10,7 +10,7 @@
 
 # Check if we already have the file
 
-	# If not, download it
+	# If not, download it: https://www.ssa.gov/oact/babynames/state/namesbystate.zip
 
 	# File is in zip format, so unzip it to use contents
 
